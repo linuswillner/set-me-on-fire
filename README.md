@@ -1,4 +1,4 @@
-# set-me-on-fire
+# 🔥 set-me-on-fire
 
 A script to add "Set Me On Fire" to the Windows context menu as an alias to a promptless Shift + Delete. If you've ever been really pissed off at a file, you can now kill it with fire.
 
