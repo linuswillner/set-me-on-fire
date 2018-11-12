@@ -1,13 +1,10 @@
-const regedit = require('regedit')
 const { keyArray, deleteTopology } = require('./registryData')
-
-// TODO: Friendlier logging, reduce callback hell
 
 function getExistingKeys () {
   return new Promise(resolve => {
     const unfilteredList = []
 
-    regedit.arch.list(keyArray)
+    global.regedit.arch.list(keyArray)
       .on('data', entry => unfilteredList.push(entry))
       .on('finish', () => {
         // Data being an empty object indicates that the value doesn't exist
@@ -17,24 +14,54 @@ function getExistingKeys () {
   })
 }
 
-function cleanRegistry () {
+async function cleanRegistry () {
+  const existingKeys = await getExistingKeys()
+
+  if (existingKeys.length > 0) {
+    for (let key in deleteTopology) {
+      const keyPath = deleteTopology[key]
+
+      try {
+        await deleteKey(keyPath)
+      } catch (err) {
+        if (err.message === 'registry path does not exist') console.warn(`Tried to delete non-existent registry key ${keyPath}, ignoring.`.yellow)
+        else console.error(`ERROR: Could not cleanup registry key ${keyPath}!\n`.red, err)
+      }
+    }
+  }
+}
+
+function createKey (keyPath) {
   return new Promise((resolve, reject) => {
-    getExistingKeys().then(existingKeys => {
-      if (existingKeys.length > 0) {
-        deleteTopology.forEach(key => {
-          regedit.deleteKey(key, err => {
-            if (err) {
-              console.error(`Could not clean up registry key ${key}!\n`, err)
-              reject(err)
-            } else resolve()
-          })
-        })
-      } else resolve()
+    global.regedit.createKey(keyPath, err => {
+      if (err) reject(err)
+      else resolve()
+    })
+  })
+}
+
+function deleteKey (keyPath) {
+  return new Promise((resolve, reject) => {
+    global.regedit.deleteKey(keyPath, err => {
+      if (err) reject(err)
+      else resolve()
+    })
+  })
+}
+
+function putValue (keyObj) {
+  return new Promise((resolve, reject) => {
+    global.regedit.putValue(keyObj, err => {
+      if (err) reject(err)
+      else resolve()
     })
   })
 }
 
 module.exports = {
+  createKey: createKey,
+  putValue: putValue,
+  deleteKey: deleteKey,
   getExistingKeys: getExistingKeys,
   cleanRegistry: cleanRegistry
 }

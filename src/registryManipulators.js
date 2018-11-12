@@ -1,52 +1,28 @@
-const regedit = require('regedit')
 const { entries } = require('./registryData')
-const { cleanRegistry } = require('./utils')
-
-// TODO: Friendlier logging
-
-function createKey (keyPath) {
-  return new Promise((resolve, reject) => {
-    regedit.createKey(keyPath, err => {
-      if (err) {
-        console.error(`An error occurred while creating key ${keyPath}!\n`, err)
-        reject(err)
-      } else resolve()
-    })
-  })
-}
-
-function putValue (keyObj) {
-  return new Promise((resolve, reject) => {
-    regedit.putValue(keyObj, err => {
-      if (err) {
-        console.error(`An error occurred while adding key values!\n`, err)
-        reject(err)
-      } else resolve()
-    })
-  })
-}
+const { createKey, putValue, cleanRegistry } = require('./utils')
 
 async function insertKeys () {
-  try {
-    await cleanRegistry()
-    console.log('Inserted keys into registry.')
-  } catch (err) {
-    console.error(`Could not insert registry keys!\n`, err)
-    return
-  }
+  await cleanRegistry()
 
   for (let entry in entries) {
-    await createKey(entry)
-    await putValue({ [entry]: entries[entry] })
+    try {
+      await createKey(entry)
+      await putValue({ [entry]: entries[entry] })
+    } catch (err) {
+      console.error(`ERROR: Could not create registry key ${entry}!\n`.red, err)
+    }
   }
+
+  console.log('Done! Now, whenever you right-click a file or folder in the Windows Explorer, you will see an option called "Set Me On Fire".'.green)
+  console.log('WARNING: Clicking "Set Me On Fire" will permanently delete the target file or folder. Don\'t say I didn\'t warn you.'.red)
 }
 
 async function removeKeys () {
   try {
     await cleanRegistry()
-    console.log('Removed keys from registry.')
+    console.log('Done! You will not have the "Set Me On Fire" option anymore.'.green)
   } catch (err) {
-    console.error(`Could not remove registry keys!\n`, err)
+    console.error('ERROR: Could not revert registry changes!\n'.red, err)
   }
 }
 

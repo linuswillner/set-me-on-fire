@@ -1,9 +1,10 @@
 // ...\*\shell affects files, ...\Directory\shell affects folders
 
+// Delete uses reverse topology in order to prevent EACCESS errors
 const deleteTopology = [
   'HKCU\\Software\\Classes\\*\\shell\\SetMeOnFire\\command',
-  'HKCU\\Software\\Classes\\*\\shell\\SetMeOnFire',
   'HKCU\\Software\\Classes\\Directory\\Shell\\SetMeOnFire\\command',
+  'HKCU\\Software\\Classes\\*\\shell\\SetMeOnFire',
   'HKCU\\Software\\Classes\\Directory\\Shell\\SetMeOnFire'
 ]
 

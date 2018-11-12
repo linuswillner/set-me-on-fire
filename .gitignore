@@ -2,5 +2,5 @@
 node_modules
 npm-debug.log
 
-# Production build
-dist
+# Build folder
+build
