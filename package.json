@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/linuswillner/set-me-on-fire#readme",
   "dependencies": {
-    "colors": "^1.3.2",
+    "colors": "^1.3.2"
+  },
+  "optionalDependencies": {
     "regedit": "^3.0.0"
   },
   "devDependencies": {
