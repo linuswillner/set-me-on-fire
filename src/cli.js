@@ -1,5 +1,6 @@
 const { exec } = require('child_process')
 const { insertKeys, removeKeys } = require('./registryManipulators')
+const introText = require('./introText')
 
 function main (readlineInterface) {
   writeInitial()
@@ -8,15 +9,7 @@ function main (readlineInterface) {
 
 // Initial text output
 function writeInitial () {
-  console.log('\n ------------------ SET ME ON FIRE ------------------')
-  console.log('|                                                    |')
-  console.log('|           Set Me On Fire Injecter Script           |')
-  console.log('|   https://github.com/linuswillner/set-me-on-fire   |')
-  console.log('|                                                    |')
-  console.log('| Created by Linus Willner (https://linuswillner.me) |')
-  console.log('|                                                    |')
-  console.log(' ----------------------------------------------------\n')
-  console.log('This script will add or remove "Set Me On Fire" as an option\nin the Windows Explorer context menu as an alias/shortcut\nto Shift + Delete.\n')
+  console.log(introText)
   console.log('Now, you have three options.'.green)
 }
 
