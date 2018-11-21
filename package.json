@@ -1,10 +1,10 @@
 {
   "name": "set-me-on-fire",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A script to add \"Set Me On Fire\" to the Windows context menu",
   "main": "SetMeOnFire.js",
   "scripts": {
-    "build": "pkg SetMeOnFire.js --targets latest-win-x64,latest-win-x86 --out-dir build --debug && node scripts/build.js",
+    "build": "npm test && pkg SetMeOnFire.js --targets latest-win-x64,latest-win-x86 --out-dir build --debug && node scripts/build.js",
     "test": "eslint ."
   },
   "repository": {
