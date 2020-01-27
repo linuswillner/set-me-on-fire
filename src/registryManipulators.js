@@ -4,7 +4,7 @@ const { createKey, putValue, cleanRegistry } = require('./utils')
 async function insertKeys () {
   await cleanRegistry()
 
-  for (let entry in entries) {
+  for (const entry in entries) {
     try {
       await createKey(entry)
       await putValue({ [entry]: entries[entry] })

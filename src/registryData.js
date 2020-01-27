@@ -14,7 +14,7 @@ const entries = {
       value: 'Set Me On Fire',
       type: 'REG_DEFAULT'
     },
-    'Position': {
+    Position: {
       value: 'Bottom',
       type: 'REG_SZ'
     }
@@ -30,7 +30,7 @@ const entries = {
       value: 'Set Me On Fire',
       type: 'REG_DEFAULT'
     },
-    'Position': {
+    Position: {
       value: 'Bottom',
       type: 'REG_SZ'
     }
@@ -46,7 +46,7 @@ const entries = {
 const getKeyArray = () => {
   const keyArray = []
 
-  for (let entry in entries) {
+  for (const entry in entries) {
     keyArray.push(entry)
   }
 

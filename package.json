@@ -5,7 +5,9 @@
   "main": "SetMeOnFire.js",
   "scripts": {
     "build": "npm test && pkg SetMeOnFire.js --targets latest-win-x64,latest-win-x86 --out-dir build --debug && node scripts/build.js",
-    "test": "eslint ."
+    "test": "npm run lint",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
