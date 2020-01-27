@@ -18,7 +18,7 @@ async function cleanRegistry () {
   const existingKeys = await getExistingKeys()
 
   if (existingKeys.length > 0) {
-    for (let key in deleteTopology) {
+    for (const key in deleteTopology) {
       const keyPath = deleteTopology[key]
 
       try {
