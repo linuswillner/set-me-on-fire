@@ -29,7 +29,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.1.0",
+    "eslint-plugin-standard": "^5.0.0",
     "fs-extra": "^8.1.0",
     "pkg": "^4.4.9",
     "zip-dir": "^1.0.2"
