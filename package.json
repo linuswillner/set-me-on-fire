@@ -32,6 +32,6 @@
     "eslint-plugin-standard": "^4.1.0",
     "fs-extra": "^8.1.0",
     "pkg": "^4.4.9",
-    "zip-dir": "^1.0.2"
+    "zip-dir": "^2.0.0"
   }
 }
